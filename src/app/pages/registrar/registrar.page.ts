@@ -13,6 +13,12 @@ export class RegistrarPage implements OnInit {
   mdl_pass: string = '';
   mdl_nombre: string = '';
   mdl_apellido: string = '';
+  mdl_telefono: string = '';
+  mdl_nivel_artes_marciales_id: number;
+  mdl_tipo_usuario_id: number;
+  mdl_usuario_estado_id: number;
+  mdl_nivel_id: number;
+  mdl_contacto_emergencia_id: any;
 
   constructor(
     private router: Router,
@@ -31,50 +37,46 @@ export class RegistrarPage implements OnInit {
     this.router.navigate(['ingreso'], extras);
   }
 
-  registrarUser() {
+  registerUser() {
     let that = this;
     this.loadingController
       .create({
         message: 'Creando usuario...',
         spinner: 'lines',
       })
-      .then(async (data) => {
-        data.present();
+      .then(async (loading) => {
+        loading.present();
         if (
-          this.mdl_correo !== '' ||
-          this.mdl_pass !== '' ||
-          this.mdl_nombre !== '' ||
+          this.mdl_correo !== '' &&
+          this.mdl_pass !== '' &&
+          this.mdl_nombre !== '' &&
           this.mdl_apellido !== ''
         ) {
-          console.log('FSR:   ' + this.mdl_correo);
-          console.log('FSR:   ' + this.mdl_pass);
-          console.log('FSR:   ' + this.mdl_nombre);
-          console.log('FSR:   ' + this.mdl_apellido);
-
           try {
-            let respuesta = await this.api.AlmacenarUsuario(
+            await this.api.registrarUsuario(
+              this.mdl_nombre,
               this.mdl_correo,
               this.mdl_pass,
-              this.mdl_nombre,
-              this.mdl_apellido
+              this.mdl_telefono, // Agrega el teléfono aquí
+              this.mdl_nivel_artes_marciales_id, // Agrega el ID del nivel de artes marciales aquí
+              this.mdl_tipo_usuario_id, // Agrega el ID del tipo de usuario aquí
+              this.mdl_usuario_estado_id, // Agrega el ID del estado de usuario aquí
+              this.mdl_nivel_id, // Agrega el ID del nivel aquí
+              this.mdl_contacto_emergencia_id // Agrega el ID del contacto de emergencia aquí
             );
-            if (respuesta['result'][0].RESPUESTA == 'OK') {
-              that.presentToast('Usuario creado correctamente');
-              this.navegar();
-            } else {
-              that.presentErrorToast('El correo ingresado ya existe');
-            }
+            that.presentToast('Usuario creado correctamente');
+            this.navegar();
           } catch (error) {
-            console.log(error);
+            console.error(error);
+            that.presentErrorToast('Error al crear usuario');
           }
-
-          data.dismiss();
         } else {
           that.presentErrorToast('Debe rellenar todos los campos');
-          data.dismiss();
         }
+        loading.dismiss();
       });
   }
+  
 
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({

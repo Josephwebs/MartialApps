@@ -1,15 +1,13 @@
-<ion-header> </ion-header>
+<ion-header>
+</ion-header>
 
 <ion-content class="ion-padding magnolia">
-  <img
-    class="logo"
-    src="../../../assets/img/MartialAppsWhite.png"
-    alt="duoc padre
-    alonso ovalle"
-  />
-  <ion-text>
-    <h1>Registrate como usuario ingresando los siguientes datos</h1>
-  </ion-text>
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+    <img class="logo" src="../../../assets/img/MartialAppsWhite.png" alt="duoc padre alonso ovalle" />
+    <ion-text>
+      <h1>Regístrate como usuario ingresando los siguientes datos</h1>
+    </ion-text>
+  </div>
   <ion-item class="ion-margin-top inputRedondo" lines="none">
     <ion-label position="stacked">Correo</ion-label>
     <ion-input type="email" [(ngModel)]="mdl_correo" required="true">
@@ -34,19 +32,51 @@
       <ion-icon name="person" slot="start"></ion-icon>
     </ion-input>
   </ion-item>
-  <ion-button
-    (click)="registrarUser()"
-    expand="block"
-    class="primario-bg-button"
-    color="ion-color-warning"
-    >Registrate</ion-button
-  >
+  <ion-item class="ion-margin-top inputRedondo">
+    <ion-label position="stacked">Teléfono</ion-label>
+    <ion-input [(ngModel)]="mdl_telefono" type="tel" required="true">
+      <ion-icon name="call" slot="start"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top inputRedondo">
+    <ion-label position="stacked">ID del Nivel de Artes Marciales</ion-label>
+    <ion-input [(ngModel)]="mdl_nivel_artes_marciales_id" type="number" required="true">
+      <ion-icon name="keypad" slot="start"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top inputRedondo">
+    <ion-label position="stacked">ID del Tipo de Usuario</ion-label>
+    <ion-input [(ngModel)]="mdl_tipo_usuario_id" type="number" required="true">
+      <ion-icon name="keypad" slot="start"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top inputRedondo">
+    <ion-label position="stacked">ID del Estado de Usuario</ion-label>
+    <ion-input [(ngModel)]="mdl_usuario_estado_id" type="number" required="true">
+      <ion-icon name="keypad" slot="start"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top inputRedondo">
+    <ion-label position="stacked">ID del Nivel</ion-label>
+    <ion-input [(ngModel)]="mdl_nivel_id" type="number" required="true">
+      <ion-icon name="keypad" slot="start"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top inputRedondo">
+    <ion-label position="stacked">ID del Contacto de Emergencia</ion-label>
+    <ion-input [(ngModel)]="mdl_contacto_emergencia_id" type="number" required="true">
+      <ion-icon name="keypad" slot="start"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top">
+    <ion-label>Gimnasio</ion-label>
+    <ion-toggle [(ngModel)]="isGimnasio"></ion-toggle>
+  </ion-item>
+  <ion-button (click)="registrarUser()" expand="block" class="primario-bg-button" color="ion-color-warning">
+    Registrarse
+  </ion-button>
 
-  <ion-button
-    (click)="back()"
-    expand="block"
-    color="ion-color-warning"
-    class="primario-bg-button"
-    >Volver</ion-button
-  >
+  <ion-button (click)="back()" expand="block" color="ion-color-warning" class="primario-bg-button">
+    Volver
+  </ion-button>
 </ion-content>

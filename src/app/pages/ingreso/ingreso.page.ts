@@ -70,20 +70,20 @@ export class IngresoPage implements OnInit {
       .then(async (data) => {
         data.present();
         try {
-          let respuesta = await this.api.loginPersona(
-            this.mdl_correo,
-            this.mdl_pass
+          let respuesta: any = await this.api.loginPersona(
+              this.mdl_correo,
+              this.mdl_pass
           );
-          if (respuesta['result'] === 'LOGIN OK') {
-            localStorage.setItem('idUsuario', JSON.stringify(this.mdl_correo));
-            that.presentToast('inicio de sesion correcto', 'success');
-            this.router.navigate(['principal'], parametros);
+          if (respuesta.success) { // Verifica si existe la propiedad success en la respuesta
+              localStorage.setItem('idUsuario', JSON.stringify(this.mdl_correo));
+              that.presentToast('Inicio de sesión correcto', 'success');
+              this.router.navigate(['principal'], parametros);
           } else {
-            that.presentToast('Nombre o contraseña incorrecto', 'danger');
+              that.presentToast('Nombre o contraseña incorrecto', 'danger');
           }
-        } catch (error) {
+      } catch (error) {
           console.log(error);
-        }
+      }
 
         data.dismiss();
       });

@@ -3,16 +3,33 @@ import { NavigationExtras, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 
+interface Gimnasio {
+  id: number;
+  nombre: string;
+  correo_electronico: string;
+  telefono: string;
+  ubicacion: string;
+  horario: string;
+  fecha_ingreso: string;
+  descripcion: string;
+  imagen_url: string;
+  estado_id: number;
+}
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
 })
+
+
 export class PrincipalPage implements OnInit {
   nombre: string = '';
   apellido: string = '';
   mdl_correo: string = '';
+  gimnasios: any;
 
+  
   constructor(
     private router: Router,
     private api: ApiService,
@@ -67,25 +84,22 @@ export class PrincipalPage implements OnInit {
       .then(async (res) => {
         try {
           res.present();
-          let data = await this.api.obtenerPersona(
-            this.mdl_correo.slice(1, -1)
-          );
-          this.nombre = this.capitalize(data['result'][0].NOMBRE);
-          this.apellido = this.capitalize(data['result'][0].APELLIDO);
-          console.log(this.nombre, this.apellido);
+          // Llama al método obtenerGimnasios() del servicio ApiService
+          let data: any = await this.api.obtenerGimnasios();
+          this.gimnasios = data.gimnasios;
+          console.log(this.gimnasios); // Aquí puedes ver los datos de los gimnasios en la consola
 
           res.dismiss();
         } catch (error) {
           this.presentToast(
-            'ocurrio un error tratando de acceder a su usuario, por favor vuelva a iniciar sesión',
+            'Ocurrió un error tratando de obtener la información. Por favor, inténtelo de nuevo más tarde.',
             'danger'
           );
-          localStorage.removeItem('idUsuario');
           res.dismiss();
-          this.router.navigate(['ingreso']);
         }
       });
   }
+
 
   cerrarSesion() {
     let extras: NavigationExtras = {

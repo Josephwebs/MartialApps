@@ -1,22 +1,14 @@
 <ion-content [fullscreen]="true" class="ion-padding magnolia">
-  <img
-    class="logo"
-    src="../../../assets/img/MartialAppsWhite.png"
-    alt="duoc padre
-    alonso ovalle"
-  />
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+    <img
+      class="logo"
+      src="../../../assets/img/MartialAppsWhite.png"
+      alt="duoc padre alonso ovalle"
+    />
+    <h1>Bienvenido</h1>
+  </div>
 
-  <h1>Bienvenido</h1>
-
-  <h1 style="padding-bottom: 10px">{{" " + nombre + " " + apellido}}</h1>
-
-  <ion-button
-    (click)="registrarAsistencia()"
-    expand="block"
-    color="ion-color-warning"
-    class="primario-bg-button"
-    >Registrar asistencia</ion-button
-  >
+  <h1 style="padding-bottom: 10px">{{ nombre + ' ' + apellido }}</h1>
 
   <ion-button
     (click)="editar()"
@@ -33,4 +25,18 @@
     class="primario-bg-button"
     >Cerrar Sesión</ion-button
   >
+
+  <!-- Mostrar los gimnasios -->
+  <ion-list>
+    <ion-item *ngFor="let gimnasio of gimnasios">
+      <ion-thumbnail slot="start">
+        <img [src]="gimnasio.imagen_url" alt="{{ gimnasio.nombre }}" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ gimnasio.nombre }}</h2>
+        <p>{{ gimnasio.descripcion }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

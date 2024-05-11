@@ -5,25 +5,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
-  ruta: string = 'https://fer-sepulveda.cl/API_PRUEBA2/api-service.php';
+  ruta: string = 'http://127.0.0.1:5000/';
 
   constructor(private http: HttpClient) {}
 
   loginPersona(correo, contrasena) {
     let that = this;
+    let body = {
+        "dc_correo_electronico": correo,
+        "dc_contrasena": contrasena
+    };
 
-    return new Promise((resolve) => {
-      resolve(
-        that.http
-          .post(that.ruta, {
-            nombreFuncion: 'UsuarioLogin',
-            parametros: [correo, contrasena],
-          })
-          .toPromise()
-      );
-    });
-  }
-
+    return that.http.post(that.ruta + 'login', body)
+        .toPromise();
+}
   AlmacenarUsuario(correo, contrasena, nombre, apellido) {
     let that = this;
 
@@ -68,18 +63,27 @@ export class ApiService {
     });
   }
 
-  registrarAsistencia(CORREO: string, ID_CLASE: string) {
+  obtenerGimnasios() {
     let that = this;
 
-    return new Promise((resolve) => {
-      resolve(
-        that.http
-          .post(that.ruta, {
-            nombreFuncion: 'AsistenciaAlmacenar',
-            parametros: [CORREO, ID_CLASE],
-          })
-          .toPromise()
-      );
-    });
+    return that.http.get(that.ruta + 'gimnasios')
+        .toPromise();
   }
+
+    // Método para registrar un nuevo usuario
+    registrarUsuario(correo: string, contrasena: string, nombre: string, telefono: string, nivelArtesMarcialesId: number, tipoUsuarioId: number, usuarioEstadoId: number, nivelId: number, contactoEmergenciaId: number) {
+      const body = {
+        dc_nombre: nombre,
+        dc_correo_electronico: correo,
+        dc_contrasena: contrasena,
+        dc_telefono: telefono,
+        tb_nivel_artes_marciales_id: nivelArtesMarcialesId,
+        tb_tipo_usuario_id: tipoUsuarioId,
+        tb_usuario_estado_id: usuarioEstadoId,
+        tb_nivel_id: nivelId,
+        tb_contacto_emergencia_id: contactoEmergenciaId
+      };
+  
+      return this.http.post(this.ruta + 'usuarios', body).toPromise();
+    }
 }
