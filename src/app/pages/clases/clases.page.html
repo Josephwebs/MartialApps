@@ -1,0 +1,23 @@
+<!-- clases.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clases de {{ gymName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let clase of clases">
+      <ion-label>
+        <h2>{{ clase.dc_nombre_clase }}</h2>
+        <p>{{ clase.dc_horario }}</p>
+        <p>{{ clase.df_fecha | date }}</p>
+        <p>Cupos disponibles: {{ clase.nb_cupos_disponibles }}</p>
+      </ion-label>
+      <ion-thumbnail slot="end">
+        <img
+          [src]="clase.dc_imagen_url"
+        /> </ion-thumbnail></ion-item></ion-list
+></ion-content>
+
+<app-tab-bar></app-tab-bar>

@@ -7,14 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { PrincipalPageRoutingModule } from './principal-routing.module';
 
 import { PrincipalPage } from './principal.page';
+import { TabBarComponent } from 'src/app/components/tab-bar/tab-bar.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    PrincipalPageRoutingModule
-  ],
-  declarations: [PrincipalPage]
+  imports: [CommonModule, FormsModule, IonicModule, PrincipalPageRoutingModule],
+  declarations: [PrincipalPage, TabBarComponent],
 })
 export class PrincipalPageModule {}

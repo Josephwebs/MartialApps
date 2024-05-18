@@ -1,42 +1,38 @@
+<!-- principal.page.html -->
 <ion-content [fullscreen]="true" class="ion-padding magnolia">
-  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    "
+  >
     <img
       class="logo"
       src="../../../assets/img/MartialAppsWhite.png"
-      alt="duoc padre alonso ovalle"
+      alt="Martial apps logo"
     />
-    <h1>Bienvenido</h1>
   </div>
 
-  <h1 style="padding-bottom: 10px">{{ nombre + ' ' + apellido }}</h1>
-
-  <ion-button
-    (click)="editar()"
-    expand="block"
-    color="ion-color-warning"
-    class="primario-bg-button"
-    >Editar contraseña</ion-button
-  >
-
-  <ion-button
-    (click)="cerrarSesion()"
-    expand="block"
-    color="ion-color-warning"
-    class="primario-bg-button"
-    >Cerrar Sesión</ion-button
-  >
+  <h1 style="padding-bottom: 10px; color: #1e352f">
+    {{ nombre + ' ' + apellido }}
+  </h1>
 
   <!-- Mostrar los gimnasios -->
-  <ion-list>
-    <ion-item *ngFor="let gimnasio of gimnasios">
-      <ion-thumbnail slot="start">
-        <img [src]="gimnasio.imagen_url" alt="{{ gimnasio.nombre }}" />
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{ gimnasio.nombre }}</h2>
-        <p>{{ gimnasio.descripcion }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
+  <ion-card
+    *ngFor="let gimnasio of gimnasios"
+    class="gimnasio-card"
+    (click)="verClases(gimnasio)"
+  >
+    <ion-img [src]="gimnasio.imagen_url" alt="{{ gimnasio.nombre }}"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{ gimnasio.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ gimnasio.descripcion }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<app-tab-bar></app-tab-bar>

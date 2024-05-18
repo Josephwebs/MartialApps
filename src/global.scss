@@ -25,6 +25,13 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,900&family=Open+Sans&display=swap");
+:host {
+  --color-primary: #33f032;
+  --color-secondary: #000000;
+  --color-background: #ebf2fa;
+  --color-text-dark: #335145;
+  --color-text-light: #1e352f;
+}
 html {
   font-family: "Kanit", sans-serif;
   font-family: "Open Sans", sans-serif;
@@ -110,13 +117,18 @@ h2 {
 // Colores dinamicos para la tarjeta
 
 ion-card {
-  --background: #feb901;
+  --background: linear-gradient(
+    to bottom,
+    #363636,
+    #222222
+  ); /* Gradiente de arriba a abajo */
+
   --color: #ffffff;
   border-radius: 10px;
 }
 
 ion-card-title {
-  --color: #ffffff;
+  --color: var(--color-text-dark);
 }
 
 ion-card-subtitle {

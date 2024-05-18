@@ -19,6 +19,7 @@ export class RegistrarPage implements OnInit {
   mdl_usuario_estado_id: number;
   mdl_nivel_id: number;
   mdl_contacto_emergencia_id: any;
+  nivelesArtesMarciales: any[];
 
   constructor(
     private router: Router,
@@ -27,7 +28,9 @@ export class RegistrarPage implements OnInit {
     private toastController: ToastController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.obtenerNivelesArtesMarciales();
+  }
 
   navegar() {
     let extras: NavigationExtras = {
@@ -37,8 +40,18 @@ export class RegistrarPage implements OnInit {
     this.router.navigate(['ingreso'], extras);
   }
 
+  async obtenerNivelesArtesMarciales() {
+    try {
+      // Obtener los niveles de artes marciales del servicio ApiService
+      const niveles: any = await this.api.obtenerNiveles();
+      this.nivelesArtesMarciales = niveles.niveles;
+    } catch (error) {
+      console.error('Error al obtener los niveles de artes marciales:', error);
+      // Manejo de errores
+    }
+  }
+
   registerUser() {
-    let that = this;
     this.loadingController
       .create({
         message: 'Creando usuario...',
@@ -50,34 +63,34 @@ export class RegistrarPage implements OnInit {
           this.mdl_correo !== '' &&
           this.mdl_pass !== '' &&
           this.mdl_nombre !== '' &&
-          this.mdl_apellido !== ''
+          this.mdl_apellido !== '' &&
+          this.mdl_nivel_artes_marciales_id // Asegúrate de que el ID del nivel de artes marciales esté definido
         ) {
           try {
             await this.api.registrarUsuario(
-              this.mdl_nombre,
               this.mdl_correo,
               this.mdl_pass,
+              this.mdl_nombre,
               this.mdl_telefono, // Agrega el teléfono aquí
-              this.mdl_nivel_artes_marciales_id, // Agrega el ID del nivel de artes marciales aquí
-              this.mdl_tipo_usuario_id, // Agrega el ID del tipo de usuario aquí
-              this.mdl_usuario_estado_id, // Agrega el ID del estado de usuario aquí
-              this.mdl_nivel_id, // Agrega el ID del nivel aquí
-              this.mdl_contacto_emergencia_id // Agrega el ID del contacto de emergencia aquí
+              this.mdl_nivel_artes_marciales_id, // Pasamos directamente el ID del nivel seleccionado
+              2, // Agrega el ID del tipo de usuario aquí
+              1, // Agrega el ID del estado de usuario aquí
+              this.mdl_nivel_artes_marciales_id, // Agrega el ID del nivel aquí
+              1, // Agrega el ID del contacto de emergencia aquí
+              this.mdl_apellido
             );
-            that.presentToast('Usuario creado correctamente');
+            this.presentToast('Usuario creado correctamente');
             this.navegar();
           } catch (error) {
             console.error(error);
-            that.presentErrorToast('Error al crear usuario');
+            this.presentErrorToast('Error al crear usuario');
           }
         } else {
-          that.presentErrorToast('Debe rellenar todos los campos');
+          this.presentErrorToast('Debe rellenar todos los campos');
         }
         loading.dismiss();
       });
   }
-  
-
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,

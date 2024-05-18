@@ -32,6 +32,23 @@ const routes: Routes = [
       import('./pages/editar/editar.module').then((m) => m.EditarPageModule),
   },
   {
+    path: 'buscar',
+    loadChildren: () =>
+      import('./pages/buscar/buscar.module').then((m) => m.BuscarPageModule),
+  },
+  {
+    path: 'configuracion',
+    loadChildren: () =>
+      import('./pages/configuracion/configuracion.module').then(
+        (m) => m.ConfiguracionPageModule
+      ),
+  },
+  {
+    path: 'clases',
+    loadChildren: () =>
+      import('./pages/clases/clases.module').then((m) => m.ClasesPageModule),
+  },
+  {
     path: 'e404',
     loadChildren: () =>
       import('./pages/e404/e404.module').then((m) => m.E404PageModule),

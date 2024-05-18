@@ -1,3 +1,4 @@
+// principal.page.ts
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -21,15 +22,12 @@ interface Gimnasio {
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
 })
-
-
 export class PrincipalPage implements OnInit {
   nombre: string = '';
   apellido: string = '';
   mdl_correo: string = '';
   gimnasios: any;
 
-  
   constructor(
     private router: Router,
     private api: ApiService,
@@ -56,7 +54,7 @@ export class PrincipalPage implements OnInit {
         data.dismiss();
       });
 
-    this.listar();
+    this.listarGimnasios();
   }
 
   registrarAsistencia() {
@@ -75,7 +73,7 @@ export class PrincipalPage implements OnInit {
     this.router.navigate(['editar'], extras);
   }
 
-  async listar() {
+  async listarGimnasios() {
     this.loadingController
       .create({
         message: 'Obteniendo Información...',
@@ -100,16 +98,6 @@ export class PrincipalPage implements OnInit {
       });
   }
 
-
-  cerrarSesion() {
-    let extras: NavigationExtras = {
-      replaceUrl: true,
-      state: {},
-    };
-    localStorage.removeItem('idUsuario');
-    this.router.navigate(['ingreso'], extras);
-  }
-
   async presentToast(mensaje: string, color: string) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -123,5 +111,36 @@ export class PrincipalPage implements OnInit {
 
   capitalize(word: string) {
     return word[0].toUpperCase() + word.slice(1);
+  }
+
+  cerrarSesion() {
+    let extras: NavigationExtras = {
+      replaceUrl: true,
+      state: {},
+    };
+    localStorage.removeItem('idUsuario');
+    this.router.navigate(['ingreso'], extras);
+  }
+
+  home() {
+    this.router.navigate(['principal']);
+  }
+
+  buscar() {
+    this.router.navigate(['buscar']);
+  }
+
+  configuracion() {
+    this.router.navigate(['configuracion']);
+  }
+
+  verClases(gimnasio: Gimnasio) {
+    const extras: NavigationExtras = {
+      queryParams: {
+        gymId: gimnasio.id,
+        gymName: gimnasio.nombre,
+      },
+    };
+    this.router.navigate(['clases'], extras);
   }
 }

@@ -1,0 +1,18 @@
+<ion-tab-bar slot="bottom">
+  <ion-tab-button tab="home" (click)="home()">
+    <ion-label>Inicio</ion-label>
+    <ion-icon name="home"></ion-icon>
+  </ion-tab-button>
+  <ion-tab-button tab="search" (click)="buscar()">
+    <ion-label>Buscar</ion-label>
+    <ion-icon name="search"></ion-icon>
+  </ion-tab-button>
+  <ion-tab-button tab="settings" (click)="configuracion()">
+    <ion-label>Configuración</ion-label>
+    <ion-icon name="settings"></ion-icon>
+  </ion-tab-button>
+  <ion-tab-button (click)="cerrarSesion()">
+    <ion-label>Cerrar Sesión</ion-label>
+    <ion-icon name="log-out"></ion-icon>
+  </ion-tab-button>
+</ion-tab-bar>
