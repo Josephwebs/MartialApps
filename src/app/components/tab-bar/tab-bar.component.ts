@@ -17,6 +17,7 @@ export class TabBarComponent implements OnInit {
       state: {},
     };
     localStorage.removeItem('idUsuario');
+    localStorage.removeItem('user');
     this.router.navigate(['ingreso'], extras);
   }
 

@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ConfiguracionPageRoutingModule } from './configuracion-routing.module';
-
-import { ConfiguracionPage } from './configuracion.page';
+import { ClasesDetallePageRoutingModule } from './clases-detalle-routing.module';
 import { TabBarComponent } from 'src/app/components/tab-bar/tab-bar.component';
+
+import { ClasesDetallePage } from './clases-detalle.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConfiguracionPageRoutingModule,
+    ClasesDetallePageRoutingModule,
   ],
-  declarations: [ConfiguracionPage, TabBarComponent],
+  declarations: [ClasesDetallePage, TabBarComponent],
 })
-export class ConfiguracionPageModule {}
+export class ClasesDetallePageModule {}

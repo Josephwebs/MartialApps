@@ -75,7 +75,11 @@ export class IngresoPage implements OnInit {
             this.mdl_pass
           );
           if (respuesta.success) {
-            localStorage.setItem('idUsuario', JSON.stringify(this.mdl_correo));
+            localStorage.setItem(
+              'idUsuario',
+              JSON.stringify(respuesta.user.id)
+            );
+            localStorage.setItem('user', JSON.stringify(respuesta.user));
             that.presentToast('Inicio de sesión correcto', 'success');
             this.router.navigate(['principal'], parametros);
           } else {
@@ -83,6 +87,7 @@ export class IngresoPage implements OnInit {
           }
         } catch (error) {
           console.log(error);
+          that.presentToast('Nombre o contraseña incorrecto', 'danger');
         }
 
         data.dismiss();

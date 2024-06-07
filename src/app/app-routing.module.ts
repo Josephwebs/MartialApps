@@ -49,6 +49,20 @@ const routes: Routes = [
       import('./pages/clases/clases.module').then((m) => m.ClasesPageModule),
   },
   {
+    path: 'clases-detalle/:claseId',
+    loadChildren: () =>
+      import('./pages/clases-detalle/clases-detalle.module').then(
+        (m) => m.ClasesDetallePageModule
+      ),
+  },
+  {
+    path: 'reservation-requests',
+    loadChildren: () =>
+      import('./pages/reservation-requests/reservation-requests.module').then(
+        (m) => m.ReservationRequestsPageModule
+      ),
+  },
+  {
     path: 'e404',
     loadChildren: () =>
       import('./pages/e404/e404.module').then((m) => m.E404PageModule),

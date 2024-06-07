@@ -113,27 +113,6 @@ export class PrincipalPage implements OnInit {
     return word[0].toUpperCase() + word.slice(1);
   }
 
-  cerrarSesion() {
-    let extras: NavigationExtras = {
-      replaceUrl: true,
-      state: {},
-    };
-    localStorage.removeItem('idUsuario');
-    this.router.navigate(['ingreso'], extras);
-  }
-
-  home() {
-    this.router.navigate(['principal']);
-  }
-
-  buscar() {
-    this.router.navigate(['buscar']);
-  }
-
-  configuracion() {
-    this.router.navigate(['configuracion']);
-  }
-
   verClases(gimnasio: Gimnasio) {
     const extras: NavigationExtras = {
       queryParams: {
@@ -142,5 +121,9 @@ export class PrincipalPage implements OnInit {
       },
     };
     this.router.navigate(['clases'], extras);
+  }
+
+  verSolicitudesReserva() {
+    this.router.navigate(['/reservation-requests']);
   }
 }

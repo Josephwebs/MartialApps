@@ -39,7 +39,6 @@ export class ClasesPage implements OnInit {
     try {
       const data = await this.api.obtenerClases(this.gymId);
       this.clases = data;
-      console.log(this.clases);
     } catch (error) {
       this.presentErrorToast('Error al obtener las clases');
       console.error(error);
@@ -66,5 +65,15 @@ export class ClasesPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  verDetalleClase(clase: any) {
+    const navigationExtras: NavigationExtras = {
+      replaceUrl: true,
+      state: {
+        clase: clase,
+      },
+    };
+    this.router.navigate(['clases-detalle', clase.id], navigationExtras);
   }
 }

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ConfiguracionPageRoutingModule } from './configuracion-routing.module';
+import { ReservationRequestsPageRoutingModule } from './reservation-requests-routing.module';
 
-import { ConfiguracionPage } from './configuracion.page';
+import { ReservationRequestsPage } from './reservation-requests.page';
 import { TabBarComponent } from 'src/app/components/tab-bar/tab-bar.component';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { TabBarComponent } from 'src/app/components/tab-bar/tab-bar.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    ConfiguracionPageRoutingModule,
+    ReservationRequestsPageRoutingModule,
   ],
-  declarations: [ConfiguracionPage, TabBarComponent],
+  declarations: [ReservationRequestsPage, TabBarComponent],
 })
-export class ConfiguracionPageModule {}
+export class ReservationRequestsPageModule {}

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Detalles de la Clase</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="clase">
+    <ion-card-header>
+      <ion-card-title>{{ clase?.dc_nombre_clase }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="time-outline" slot="start"></ion-icon>
+        <ion-label>{{ clase?.dc_horario }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label>{{ clase?.df_fecha | date }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+        <ion-label>{{ clase?.descripcion }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-label
+          >Cupos disponibles: {{ clase?.nb_cupos_disponibles }}</ion-label
+        >
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-button
+    expand="block"
+    color="primary"
+    (click)="tomarClase()"
+    *ngIf="clase"
+    >Tomar Clase</ion-button
+  >
+</ion-content>
+
+<app-tab-bar></app-tab-bar>

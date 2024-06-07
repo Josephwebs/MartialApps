@@ -25,6 +25,15 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,900&family=Open+Sans&display=swap");
+
+:root {
+  --ion-color-primary: #33f032;
+  --ion-color-secondary: #000000;
+  --ion-color-background: #ebf2fa;
+  --ion-color-text-dark: #335145;
+  --ion-color-text-light: #1e352f;
+}
+
 :host {
   --color-primary: #33f032;
   --color-secondary: #000000;

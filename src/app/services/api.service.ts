@@ -14,6 +14,7 @@ export class ApiService {
     let body = {
       dc_correo_electronico: correo,
       dc_contrasena: contrasena,
+      user_type: 'usuario',
     };
 
     return that.http.post(that.ruta + 'login', body).toPromise();
@@ -91,5 +92,66 @@ export class ApiService {
     };
 
     return this.http.post(this.ruta + 'register', body).toPromise();
+  }
+
+  /**
+   * Servicios de configuracion de usuario
+   */
+
+  changeUsername(userId: number, nombre: string): Promise<any> {
+    return this.http
+      .put<any>(`${this.ruta}/change_username`, {
+        user_id: userId,
+        nombre,
+      })
+      .toPromise();
+  }
+
+  changeEmail(userId: number, correo: string): Promise<any> {
+    return this.http
+      .put<any>(`${this.ruta}/change_email`, {
+        user_id: userId,
+        correo,
+      })
+      .toPromise();
+  }
+
+  changePhone(userId: number, telefono: string): Promise<any> {
+    return this.http
+      .put<any>(`${this.ruta}/change_phone`, {
+        user_id: userId,
+        telefono,
+      })
+      .toPromise();
+  }
+
+  changePassword(userId: number, contrasena: string): Promise<any> {
+    return this.http
+      .put<any>(`${this.ruta}/change_password`, {
+        user_id: userId,
+        contrasena,
+      })
+      .toPromise();
+  }
+
+  deleteAccount(userId: number): Promise<any> {
+    return this.http
+      .delete<any>(`${this.ruta}/delete_account`, {
+        body: { user_id: userId },
+      })
+      .toPromise();
+  }
+
+  // Método para reservar una clase
+  reservarClase(solicitud: any): Promise<any> {
+    return this.http.post(`${this.ruta}reservarClase`, solicitud).toPromise();
+  }
+
+  obtenerSolicitudesReservaUsuario(tb_usuario_id: string) {
+    return this.http
+      .get<any[]>(
+        `${this.ruta}user/reservation-requests?tb_usuario_id=${tb_usuario_id}`
+      )
+      .toPromise();
   }
 }
